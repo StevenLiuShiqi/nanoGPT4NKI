@@ -10,12 +10,12 @@ from contextlib import nullcontext
 import torch
 import tiktoken
 
-from model import GPT
+from model_new import GPT
 
 # -----------------------------------------------------------------------------
 # model + sampling settings
 init_from = "gpt2"  # one of: 'gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl'
-start = "I believe the meaning of life is"  # can also specify a file: "FILE:prompt.txt"
+start = "Steven Liu is a Cornell ECE student"  # can also specify a file: "FILE:prompt.txt"
 num_samples = 1
 max_new_tokens = 100
 temperature = 0.8
@@ -72,4 +72,3 @@ with torch.no_grad():
             y = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
             print(decode(y[0].tolist()))
             print("---------------")
-
