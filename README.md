@@ -24,7 +24,7 @@ python -c "import torch, torch_neuronx; print(torch.__version__)"
 - `nanoGPT4NKI/model.py`: GPT model (nanoGPT-style) with `GPT.from_pretrained(...)`.
 - `nanoGPT4NKI/run_model.py`: trace+compile to Neuron, save/load TorchScript, and run a CPU-side generate loop.
 - `nanoGPT4NKI/sample.py`: baseline sampling on CPU/GPU without Neuron.
-- `gpt2_step_neuron.pt`: compiled artifact saved by `run_model.py` (saved in your current working directory). This repo may include an example copy under `nanoGPT4NKI/`.
+- `gpt2_step_neuron.pt`: compiled artifact saved by `run_model.py` (saved in your current working directory). This repo does not include an example copy.
 
 ## How `run_model.py` works (project-specific)
 - Wraps the GPT model as `NeuronStep`, which takes `input_ids` with a **fixed shape** `(BATCH, SEQ_LEN)` and returns next-token logits `(BATCH, vocab)`.
