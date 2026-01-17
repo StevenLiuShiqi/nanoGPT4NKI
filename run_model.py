@@ -3,7 +3,7 @@ import torch
 import torch_neuronx
 import tiktoken
 
-from nanoGPT4NKI.model import GPT
+from model import GPT
 
 SEQ_LEN = 128
 BATCH = 1
