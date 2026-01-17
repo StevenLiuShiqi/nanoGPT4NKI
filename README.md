@@ -9,7 +9,7 @@ The model **forward pass** runs on Neuron (Trainium), while the **token-by-token
 - Use `torch_neuronx.trace(...)` (a function) to compile a TorchScript module, then `torch.jit.save()` / `torch.jit.load()`.
 
 ## Environment (required)
-- A Neuron/Trainium machine (e.g. `trn1.*`) with the AWS Neuron SDK installed.
+- A Neuron/Trainium machine (e.g. `trn1.*`) with the **PyTorch 2.9 NxD Inference virtual environment** installed.
 - `torch-neuronx` and `neuronx-cc` (versions must match your Neuron SDK).
 - This repo also uses `transformers` (GPT-2 weights), and `tiktoken` (tokenizer).
 
