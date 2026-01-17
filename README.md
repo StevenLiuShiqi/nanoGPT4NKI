@@ -9,24 +9,16 @@ The model **forward pass** runs on Neuron (Trainium), while the **token-by-token
 - Use `torch_neuronx.trace(...)` (a function) to compile a TorchScript module, then `torch.jit.save()` / `torch.jit.load()`.
 
 ## Environment (required)
-- A Neuron/Trainium machine (e.g. `trn1.*`) with the **PyTorch 2.9 NxD Inference virtual environment** installed.
-- `torch-neuronx` and `neuronx-cc` (versions must match your Neuron SDK).
+- A **trn1.2xlarge** with the **PyTorch 2.9 NxD Inference virtual environment** installed.
 - This repo also uses `transformers` (GPT-2 weights), and `tiktoken` (tokenizer).
 
-If you are using the AWS Neuron DLAMI, you may have a prebuilt “NxD inference” PyTorch venv. Example (path may vary):
-
-```bash
-source /opt/aws_neuronx_venv_pytorch_2_9_nxd_inference/bin/activate
-python -c "import torch, torch_neuronx; print(torch.__version__)"
-```
-
-## Repo files (current)
+## Repo files
 - `nanoGPT4NKI/model.py`: GPT model (nanoGPT-style) with `GPT.from_pretrained(...)`.
 - `nanoGPT4NKI/run_model.py`: trace+compile to Neuron, save/load TorchScript, and run a CPU-side generate loop.
 - `nanoGPT4NKI/sample.py`: baseline sampling on CPU/GPU without Neuron.
 - `gpt2_step_neuron.pt`: compiled artifact saved by `run_model.py` (saved in your current working directory). This repo does not include an example copy.
 
-## How `run_model.py` works (project-specific)
+## How `run_model.py` works
 - Wraps the GPT model as `NeuronStep`, which takes `input_ids` with a **fixed shape** `(BATCH, SEQ_LEN)` and returns next-token logits `(BATCH, vocab)`.
 - Traces/compiles with:
   - `torch_neuronx.trace(step, example_inputs, compiler_args="--target=trn1")`
