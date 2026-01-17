@@ -35,20 +35,12 @@ python -c "import torch, torch_neuronx; print(torch.__version__)"
 - Runs a CPU-side generation loop that pads/trims to the fixed `SEQ_LEN` and calls the compiled Neuron module each step.
 
 ## Quickstart
-Option A (recommended): run from the directory **above** `nanoGPT4NKI/`:
-
 ```bash
-python nanoGPT4NKI/run_model.py
+cd nanoGPT4NKI/
+python run_model.py
 ```
 
-Option B: run from inside `nanoGPT4NKI/` (keeps `gpt2_step_neuron.pt` inside that folder):
-
-```bash
-cd nanoGPT4NKI
-PYTHONPATH=.. python run_model.py
-```
-
-It will compile, save+load `gpt2_step_neuron.pt`, run a small CPU-vs-Neuron single-step comparison, and generate text.
+It will compile, create, save, and load `gpt2_step_neuron.pt` in your local repository, run a small CPU-vs-Neuron single-step comparison, and generate text.
 
 ## Notes / constraints
 - **Static shapes:** tracing compiles for the example input shape (`SEQ_LEN=128`, `BATCH=1` in `nanoGPT4NKI/run_model.py`). If you change shapes, re-trace.
